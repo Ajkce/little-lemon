@@ -8,6 +8,7 @@ export default function SmallBtn({
   textColor,
   bordercolor,
   width,
+  isDisabled,
 }) {
   return (
     <Pressable
@@ -18,6 +19,7 @@ export default function SmallBtn({
         bordercolor && { borderColor: bordercolor },
         width && { width: width },
       ]}
+      disabled={isDisabled}
     >
       <Text style={[styles.text, textColor && { color: textColor }]}>
         {text}

@@ -1,13 +1,18 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Navbar({ navigateProp, isBackVisible }) {
+  const { userInfo } = useContext(AuthContext);
   const navigation = useNavigation();
 
   const onBack = () => {
     navigation.navigate(navigateProp);
+  };
+  const openProfile = () => {
+    navigation.navigate("Profile");
   };
   return (
     <View style={styles.navbar}>
@@ -16,16 +21,22 @@ export default function Navbar({ navigateProp, isBackVisible }) {
           <Ionicons name="arrow-back-circle" size={40} color="#2f463d" />
         </Pressable>
       )}
+
       <Image
         style={styles.image}
         source={require("../../image/littleLemonLogo.png")}
       ></Image>
-      <View style={styles.profile}>
+
+      <Pressable style={styles.profile} onPress={openProfile}>
         <Image
           style={styles.profileImage}
-          source={require("../../assets/favicon.png")}
+          source={
+            userInfo.image
+              ? { uri: userInfo.image }
+              : require("../../image/profile.webp")
+          }
         ></Image>
-      </View>
+      </Pressable>
     </View>
   );
 }

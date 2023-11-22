@@ -27,7 +27,6 @@ export default function Welcome() {
   const navigation = useNavigation();
   const onNavigate = () => {
     loginUser({ firstName: firstname, lastName, email });
-    navigation.navigate("Profile");
   };
   return (
     <View style={styles.container}>
