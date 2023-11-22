@@ -3,7 +3,7 @@ import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Navbar({ navigateProp }) {
+export default function Navbar({ navigateProp, isBackVisible }) {
   const navigation = useNavigation();
 
   const onBack = () => {
@@ -11,9 +11,11 @@ export default function Navbar({ navigateProp }) {
   };
   return (
     <View style={styles.navbar}>
-      <Pressable onPress={onBack}>
-        <Ionicons name="arrow-back-circle" size={40} color="#2f463d" />
-      </Pressable>
+      {isBackVisible && (
+        <Pressable onPress={onBack}>
+          <Ionicons name="arrow-back-circle" size={40} color="#2f463d" />
+        </Pressable>
+      )}
       <Image
         style={styles.image}
         source={require("../../image/littleLemonLogo.png")}

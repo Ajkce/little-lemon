@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { TextInput } from "react-native";
-import YellowBtn from "../ui/YellowBtn";
+import YellowBtn from "../ui/Btn";
 
 export default function Form2() {
   return (
@@ -57,12 +57,11 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   radioContainer: {
-    flexDirection: 'row',
-    alignItems:'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     gap: 10,
-    marginBottom: 20
-
+    marginBottom: 20,
   },
   radio: {
     backgroundColor: "#6c7c76",

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { TextInput } from "react-native";
-import YellowBtn from "../ui/YellowBtn";
+import YellowBtn from "../ui/Btn";
 
 export default function Form3() {
   return (

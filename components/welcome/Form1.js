@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useRef } from "react";
 import { TextInput } from "react-native";
-import YellowBtn from "../ui/YellowBtn";
+import YellowBtn from "../ui/Btn";
 import PagerView from "react-native-pager-view";
 
 export default function Form1() {
