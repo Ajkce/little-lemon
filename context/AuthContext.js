@@ -1,4 +1,5 @@
 import { Children, createContext, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContext = createContext({
   userInfo: {
@@ -6,11 +7,16 @@ export const AuthContext = createContext({
     lastName: "",
     email: "",
     phone: "",
-    emailNotification: [],
+    emailNotification: {
+      orderStatus: false,
+      passwordChandes: false,
+      specialOfers: false,
+      newsletter: false,
+    },
     image: "",
   },
   isAuthenticated: false,
-  setUser: () => {},
+  setUserData: () => {},
   loginUser: ({ firstName, lastName, email }) => {},
   logout: () => {},
 });
@@ -21,32 +27,50 @@ export const AuthProvider = ({ children }) => {
     lastName: "",
     email: "",
     phone: "",
-    emailNotification: [],
+    emailNotification: {
+      orderStatus: false,
+      passwordChandes: false,
+      specialOfers: false,
+      newsletter: false,
+    },
     image: "",
   });
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const loginUser = ({ firstName, lastName, email }) => {
+  const loginUser = async ({ firstName, lastName, email }) => {
     setUser((prevStae) => {
       setIsAuthenticated(true);
-      return {
+      const updatedUser = {
         ...prevStae,
         firstName: firstName,
         lastName: lastName,
         email: email,
       };
+      AsyncStorage.setItem("userData", JSON.stringify(updatedUser));
+      return updatedUser;
     });
   };
   const logout = () => {
     setIsAuthenticated(false);
+    AsyncStorage.removeItem("userData");
     setUser({
       firstName: "",
       lastName: "",
       email: "",
       phone: "",
-      emailNotification: [],
+      emailNotification: {
+        orderStatus: false,
+        passwordChandes: false,
+        specialOfers: false,
+        newsletter: false,
+      },
       image: "",
     });
+  };
+  const setUserData = (data) => {
+    setIsAuthenticated(true);
+    AsyncStorage.setItem("userData", JSON.stringify(data));
+    setUser(data);
   };
 
   const value = {
@@ -54,6 +78,7 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated: isAuthenticated,
     userInfo: user,
     logout: logout,
+    setUserData: setUserData,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
