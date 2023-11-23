@@ -41,6 +41,7 @@ export const AuthProvider = ({ children }) => {
     console.log("Logging in");
     setUser((prevStae) => {
       setIsAuthenticated(true);
+      console.log("It is geting tru in login");
       const updatedUser = {
         ...prevStae,
         firstName: firstName,
@@ -69,9 +70,9 @@ export const AuthProvider = ({ children }) => {
     });
   };
   const setUserData = (data) => {
-    setIsAuthenticated(true);
     AsyncStorage.setItem("userData", JSON.stringify(data));
     setUser(data);
+    setIsAuthenticated(true);
   };
 
   const value = {

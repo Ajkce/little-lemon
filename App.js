@@ -46,11 +46,15 @@ const LoggedScreen = () => {
 
 const Screen = () => {
   const { isAuthenticated, setUserData } = useContext(AuthContext);
+
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function fetchToken() {
       const storedUser = await AsyncStorage.getItem("userData");
-      setUserData(JSON.parse(storedUser));
+
+      if (storedUser) {
+        setUserData(JSON.parse(storedUser));
+      }
       setLoading(false);
     }
     fetchToken();
