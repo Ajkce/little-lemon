@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 export default function Navbar({ navigateProp, isBackVisible }) {
   const { userInfo } = useContext(AuthContext);
   const navigation = useNavigation();
+  console.log(userInfo);
 
   const onBack = () => {
     navigation.navigate(navigateProp);

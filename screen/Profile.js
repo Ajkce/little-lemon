@@ -37,6 +37,7 @@ export default function Profile() {
     }
     console.log(user);
   };
+  console.log("setting up");
   const [user, setUser] = useState({
     firstName: userInfo.firstName ? userInfo.firstName : "",
     lastName: userInfo.lastName ? userInfo.lastName : "",

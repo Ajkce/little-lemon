@@ -1,5 +1,6 @@
 import {
   Image,
+  KeyboardAvoidingView,
   Pressable,
   StyleSheet,
   Text,
@@ -8,9 +9,18 @@ import {
 } from "react-native";
 import React, { useContext, useRef, useState } from "react";
 import PagerView from "react-native-pager-view";
-import { validateEmail, validateName } from "../utils";
+
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/AuthContext";
+
+const validateName = (name) => {
+  return name.match(/^[a-zA-Z]+$/);
+};
+const validateEmail = (email) => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
 
 export default function Welcome() {
   const { loginUser } = useContext(AuthContext);
@@ -24,9 +34,9 @@ export default function Welcome() {
   console.log(firstname);
   const pagerRef = useRef(PagerView);
 
-  const navigation = useNavigation();
+
   const onNavigate = () => {
-    loginUser({ firstName: firstname, lastName, email });
+    loginUser({ firstName: firstname, lastName: lastName, email: email });
   };
   return (
     <View style={styles.container}>
@@ -42,7 +52,7 @@ export default function Welcome() {
         ref={pagerRef}
         scrollEnabled={false}
       >
-        <View style={styles.formcontainer} key="1">
+        <KeyboardAvoidingView style={styles.formcontainer} key="1">
           <Text style={styles.formtext}>Let us get to know you</Text>
 
           <View>
@@ -76,7 +86,7 @@ export default function Welcome() {
               <Text style={styles.btntext}>Next</Text>
             </Pressable>
           </View>
-        </View>
+        </KeyboardAvoidingView>
         <View style={styles.formcontainer} key="2">
           <Text style={styles.formtext}>Let us get to know you</Text>
 
@@ -180,10 +190,11 @@ const styles = StyleSheet.create({
   },
   PagerView: {
     width: "100%",
-    height: "90%",
+    height: "93%",
   },
   formcontainer: {
-    height: "93%",
+    flex: 1,
+
     justifyContent: "space-between",
     alignItems: "center",
     paddingTop: 70,

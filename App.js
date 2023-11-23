@@ -37,8 +37,8 @@ const LoggedScreen = () => {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Profile" component={Profile}></Stack.Screen>
         <Stack.Screen name="Home" component={Home}></Stack.Screen>
+        <Stack.Screen name="Profile" component={Profile}></Stack.Screen>
       </Stack.Navigator>
     </>
   );

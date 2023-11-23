@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const loginUser = async ({ firstName, lastName, email }) => {
+    console.log("Logging in");
     setUser((prevStae) => {
       setIsAuthenticated(true);
       const updatedUser = {
